@@ -116,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLink, onOpenSubscription }
             <div className="flex flex-col md:flex-row gap-4 md:gap-6">
                 <button onClick={() => onOpenLink('privacy')} className="hover:underline">Política de Privacidade</button>
                 <button onClick={() => onOpenLink('terms')} className="hover:underline">Termos e Condições</button>
-                <span>© 2024 Loja EarthFirst</span>
+                <span>© 2026 Loja EarthFirst</span>
             </div>
         </div>
       </div>

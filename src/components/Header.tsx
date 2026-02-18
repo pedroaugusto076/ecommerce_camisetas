@@ -170,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({
                      <Globe className="w-4 h-4"/> Brasil (BRL)
                 </div>
                 <div className="text-xs opacity-60">
-                    © 2024 Loja EarthFirst
+                    © 2026 Loja EarthFirst
                 </div>
             </div>
           </div>

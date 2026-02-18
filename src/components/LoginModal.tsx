@@ -32,14 +32,17 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  // Resetar visualização ao abrir
+  // Resetar visualização e carregar pedidos ao abrir
   useEffect(() => {
     if (isOpen) {
       if (currentUser) {
         setView('profile');
-        setOrders(getUserOrders(currentUser.email));
+        if (currentUser.id) {
+          getUserOrders(currentUser.id).then(setOrders).catch(() => setOrders([]));
+        } else {
+          setOrders([]);
+        }
       } else {
-        // Usa a prop initialView para decidir se abre em login ou registro
         setView(initialView);
       }
       setError('');
@@ -49,31 +52,40 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
   }, [isOpen, currentUser, initialView]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
-    setTimeout(() => {
-        try {
-            if (view === 'register') {
-                const newUser = saveUser({ name, email, password });
-                onLogin(newUser);
-                setView('profile');
-            } else {
-                const user = authenticateUser(email, password);
-                if (!user) throw new Error('E-mail ou senha inválidos.');
-                onLogin(user);
-                setOrders(getUserOrders(user.email));
-                setView('profile');
-            }
-            onClose(); // Opcional: fechar ao logar, ou manter aberto no perfil
-        } catch (err: any) {
-            setError(err.message);
-        } finally {
-            setIsLoading(false);
+    const trimmedEmail = email.trim();
+    const trimmedName = name.trim();
+    const trimmedPassword = password.trim();
+
+    try {
+      if (view === 'register') {
+        const newUser = await saveUser({ name: trimmedName, email: trimmedEmail, password: trimmedPassword });
+        onLogin(newUser);
+        if (newUser.id) {
+          const userOrders = await getUserOrders(newUser.id);
+          setOrders(userOrders);
         }
-    }, 800);
+        setView('profile');
+      } else {
+        const user = await authenticateUser(trimmedEmail, trimmedPassword);
+        if (!user) throw new Error('E-mail ou senha inválidos.');
+        onLogin(user);
+        if (user.id) {
+          const userOrders = await getUserOrders(user.id);
+          setOrders(userOrders);
+        }
+        setView('profile');
+      }
+      onClose();
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Ocorreu um erro.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleLogoutClick = () => {

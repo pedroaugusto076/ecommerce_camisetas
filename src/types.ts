@@ -40,9 +40,10 @@ export interface Order {
 }
 
 export interface User {
+  id?: string; // UUID do Supabase Auth (quando logado)
   name: string;
   email: string;
-  password?: string; // Opcional apenas na interface de display, obrigatório no DB
+  password?: string; // Opcional - usado apenas no cadastro, nunca persistido em texto claro
 }
 
 export interface Review {

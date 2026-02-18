@@ -25,8 +25,8 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
 
   // Carregar reviews e resetar imagem ao montar ou mudar produto
   useEffect(() => {
-    setReviews(getProductReviews(product.id));
-    setMainImage(product.image); // Atualiza a imagem principal se o produto mudar
+    getProductReviews(product.id).then(setReviews).catch(() => setReviews([]));
+    setMainImage(product.image);
     setNewComment('');
     setNewRating(5);
     setSelectedSize('');
@@ -62,29 +62,28 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
       setShowError(false);
   };
 
-  const handleSubmitReview = (e: React.FormEvent) => {
+  const handleSubmitReview = async (e: React.FormEvent) => {
       e.preventDefault();
       if (!currentUser || !newComment.trim()) return;
 
       setIsSubmittingReview(true);
-      
-      // Simula delay de rede
-      setTimeout(() => {
-          const review: Review = {
-              id: crypto.randomUUID(),
-              productId: product.id,
-              userName: currentUser.name,
-              rating: newRating,
-              comment: newComment,
-              date: new Date().toLocaleDateString('pt-BR')
-          };
-
-          addReview(review);
-          setReviews(prev => [...prev, review]); // Atualiza lista localmente
-          setNewComment('');
-          setNewRating(5);
-          setIsSubmittingReview(false);
-      }, 600);
+      try {
+        const review: Omit<Review, 'id'> & { id?: string } = {
+          productId: product.id,
+          userName: currentUser.name,
+          rating: newRating,
+          comment: newComment,
+          date: new Date().toLocaleDateString('pt-BR'),
+        };
+        await addReview(review);
+        setReviews(prev => [...prev, { ...review, id: review.id || crypto.randomUUID() } as Review]);
+        setNewComment('');
+        setNewRating(5);
+      } catch {
+        // Falha silenciosa ou mostrar toast - por simplicidade não tratamos
+      } finally {
+        setIsSubmittingReview(false);
+      }
   };
 
   return (

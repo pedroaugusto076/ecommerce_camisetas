@@ -15,7 +15,7 @@ import type { InfoModalType } from './components/InfoModal';
 import { SubscriptionModal } from './components/SubscriptionModal';
 import { NEW_ARRIVALS, BESTSELLERS, CATEGORIES, ALL_PRODUCTS } from './constants';
 import type { Product, CartItem, User, Order } from './types';
-import { getSession, saveSession, clearSession, saveOrder } from './utils/storage';
+import { getSession, onAuthStateChange, signOut, saveOrder } from './utils/storage';
 
 function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -33,12 +33,11 @@ function App() {
   const [infoModalKey, setInfoModalKey] = useState<string>('impact'); // Chave para identificar o conteúdo
   const [subscriptionModalOpen, setSubscriptionModalOpen] = useState(false);
 
-  // Inicializar sessão
+  // Inicializar sessão via Supabase Auth
   useEffect(() => {
-    const session = getSession();
-    if (session) {
-        setCurrentUser(session);
-    }
+    getSession().then(setCurrentUser);
+    const { data: { subscription } } = onAuthStateChange(setCurrentUser);
+    return () => subscription.unsubscribe();
   }, []);
 
   const handleProductClick = (product: Product) => {
@@ -107,16 +106,15 @@ function App() {
 
   const handleLogin = (user: User) => {
     setCurrentUser(user);
-    saveSession(user);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await signOut();
     setCurrentUser(null);
-    clearSession();
   };
 
-  const handleCheckoutSuccess = (items: CartItem[], total: number) => {
-      if (!currentUser) return;
+  const handleCheckoutSuccess = async (items: CartItem[], total: number) => {
+      if (!currentUser?.id) return;
       
       const newOrder: Order = {
           id: crypto.randomUUID(),
@@ -126,7 +124,7 @@ function App() {
           status: 'Aprovado'
       };
       
-      saveOrder(currentUser.email, newOrder);
+      await saveOrder(currentUser.id, newOrder);
   };
 
   // Funções de Informação (Modal Genérico)
