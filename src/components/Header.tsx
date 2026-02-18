@@ -51,7 +51,6 @@ export const Header: React.FC<HeaderProps> = ({
 
       <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-3' : 'bg-white py-4'}`}>
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-          {/* Logo & Menu Toggle */}
           <div className="flex items-center gap-3 md:gap-4">
             <button className="lg:hidden p-1 -ml-1" onClick={() => setMobileMenuOpen(true)}>
               <Menu className="w-6 h-6 text-brand-dark" />
@@ -63,7 +62,6 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
-          {/* Navegação Desktop */}
           <nav className="hidden lg:flex items-center gap-8">
             {NAV_ITEMS.map((item) => (
               <button
@@ -76,11 +74,9 @@ export const Header: React.FC<HeaderProps> = ({
             ))}
           </nav>
 
-          {/* Ícones */}
           <div className="flex items-center gap-4 sm:gap-6 text-brand-dark">
             <button className="hover:scale-110 transition-transform"><Search className="w-5 h-5 stroke-[1.5]" /></button>
             
-            {/* Login / User Icon */}
             <button 
                 onClick={onLoginClick}
                 className="hidden sm:flex hover:scale-110 transition-transform items-center gap-2"
@@ -112,15 +108,11 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </header>
 
-      {/* Menu Mobile - Estilo "Drawer" Moderno */}
       <div className={`fixed inset-0 z-[60] transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-          {/* Backdrop */}
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
           
-          {/* Panel */}
           <div className={`absolute top-0 left-0 w-[85%] max-w-sm h-full bg-white shadow-2xl flex flex-col transform transition-transform duration-300 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             
-            {/* Header do Menu */}
             <div className="p-5 flex justify-between items-center border-b border-gray-100">
                 <span className="font-serif text-2xl font-bold">10</span>
                 <button onClick={() => setMobileMenuOpen(false)} className="p-2 bg-gray-50 rounded-full">
@@ -128,7 +120,6 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
             </div>
             
-            {/* User Info Mobile */}
             <div className="p-5 bg-gray-50 border-b border-gray-100">
                 <div 
                     className="flex items-center gap-3 cursor-pointer"
@@ -150,7 +141,6 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
             </div>
 
-            {/* Links de Navegação */}
             <nav className="flex-1 overflow-y-auto p-5 py-6 flex flex-col gap-2">
               {NAV_ITEMS.map((item) => (
                 <button 
@@ -164,7 +154,6 @@ export const Header: React.FC<HeaderProps> = ({
               ))}
             </nav>
 
-            {/* Footer do Menu */}
             <div className="p-5 bg-gray-50 text-sm text-gray-500 space-y-4">
                 <div className="flex items-center gap-2">
                      <Globe className="w-4 h-4"/> Brasil (BRL)

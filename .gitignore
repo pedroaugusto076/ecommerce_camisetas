@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 
-# Variáveis de ambiente (credenciais - nunca commitar!)
 .env
 .env.local
 .env.*.local

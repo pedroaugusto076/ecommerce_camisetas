@@ -33,7 +33,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({ isOpen, on
 
   const handleClose = () => {
       onClose();
-      // Resetar estado após fechar (com delay visual)
       setTimeout(() => {
           setStep('select');
           setSelectedPlan('root');

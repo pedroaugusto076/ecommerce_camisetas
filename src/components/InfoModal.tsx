@@ -1,5 +1,4 @@
 import React from 'react';
-// Removidos Phone e Truck que não estavam sendo usados
 import { X, Sprout, Shirt, HelpCircle, TreePine, FileText, MapPin } from 'lucide-react';
 
 export type InfoModalType = 'impact' | 'cotton' | 'forest' | 'support' | 'company' | 'legal';

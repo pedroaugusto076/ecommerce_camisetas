@@ -16,14 +16,11 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
   const [mainImage, setMainImage] = useState(product.image);
   const [openSection, setOpenSection] = useState<string | null>('details');
   const [showError, setShowError] = useState(false);
-  
-  // Review State
   const [reviews, setReviews] = useState<Review[]>([]);
   const [newComment, setNewComment] = useState('');
   const [newRating, setNewRating] = useState(5);
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
-  // Carregar reviews e resetar imagem ao montar ou mudar produto
   useEffect(() => {
     getProductReviews(product.id).then(setReviews).catch(() => setReviews([]));
     setMainImage(product.image);
@@ -33,7 +30,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
     setShowError(false);
   }, [product.id, product.image]);
 
-  // Simular galeria de imagens baseada na imagem principal
   const images = [
     product.image,
     `https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?auto=format&fit=crop&q=80&w=400`,
@@ -50,7 +46,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
   const handleAddToCart = () => {
     if (!selectedSize) {
         setShowError(true);
-        // Scroll to size selector if needed
         return;
     }
     setShowError(false);
@@ -80,7 +75,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
         setNewComment('');
         setNewRating(5);
       } catch {
-        // Falha silenciosa ou mostrar toast - por simplicidade não tratamos
       } finally {
         setIsSubmittingReview(false);
       }
@@ -88,7 +82,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
 
   return (
     <div className="container mx-auto px-4 md:px-8 py-6 md:py-8 animate-fade-in">
-      {/* Breadcrumb e Voltar */}
       <button 
         onClick={onBack} 
         className="flex items-center gap-2 text-sm text-gray-500 hover:text-brand-dark mb-6 transition-colors"
@@ -97,9 +90,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-        {/* Coluna Esquerda: Galeria */}
         <div className="flex flex-col-reverse md:flex-row gap-4 items-start">
-          {/* Thumbnails - Horizontal scroll on mobile */}
           <div className="flex md:flex-col gap-3 overflow-x-auto md:overflow-visible no-scrollbar w-full md:w-auto pb-2 md:pb-0">
             {images.map((img, idx) => (
               <button 
@@ -111,7 +102,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
               </button>
             ))}
           </div>
-          {/* Imagem Principal */}
           <div className="flex-1 bg-gray-100 relative w-full lg:max-w-lg rounded-sm overflow-hidden">
             <div className="aspect-[3/4] w-full">
                <img src={mainImage} alt={product.name} className="w-full h-full object-cover" />
@@ -124,7 +114,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
           </div>
         </div>
 
-        {/* Coluna Direita: Informações */}
         <div className="flex flex-col">
           <div className="flex justify-between items-start mb-2">
              <span className="text-xs text-gray-500 uppercase tracking-widest bg-gray-100 px-2 py-1 rounded">Sustentável</span>
@@ -149,7 +138,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
              )}
           </div>
 
-          {/* Seleção de Cor */}
           <div className="mb-6">
             <span className="text-sm font-bold mb-2 block">Cor: <span className="font-normal text-gray-600">Multicolor</span></span>
             <div className="flex gap-3">
@@ -163,7 +151,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
             </div>
           </div>
 
-          {/* Seleção de Tamanho */}
           <div className="mb-8">
             <div className="flex justify-between items-center mb-2">
                 <div className="flex items-center gap-2">
@@ -194,7 +181,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
             {showError && <p className="text-xs text-red-500 mt-2">Por favor, selecione um tamanho para continuar.</p>}
           </div>
 
-          {/* Botão de Compra - Sticky on mobile bottom if wanted, but here keeping generic */}
           <button 
             onClick={handleAddToCart}
             className="w-full bg-brand-green text-white py-4 uppercase text-sm font-bold tracking-widest hover:bg-[#2d4433] transition-colors mb-4 flex justify-center items-center gap-2 shadow-lg rounded-sm"
@@ -207,9 +193,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
              Cada camiseta planta 10 árvores
           </div>
 
-          {/* Accordions */}
           <div className="border-t border-gray-200">
-            {/* Detalhes */}
             <div className="border-b border-gray-200">
                 <button 
                     onClick={() => toggleSection('details')}
@@ -231,7 +215,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
                 )}
             </div>
 
-            {/* Envio */}
             <div className="border-b border-gray-200">
                 <button 
                     onClick={() => toggleSection('shipping')}
@@ -252,7 +235,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
                 )}
             </div>
 
-            {/* Avaliações */}
             <div className="border-b border-gray-200">
                 <button 
                     onClick={() => toggleSection('reviews')}
@@ -268,7 +250,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
                 {openSection === 'reviews' && (
                     <div className="pb-6 animate-fade-in">
                         
-                        {/* Lista de Comentários */}
                         {reviews.length > 0 ? (
                             <div className="space-y-6 mb-8">
                                 {reviews.map((review) => (
@@ -292,7 +273,6 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, onBack, o
                             <p className="text-sm text-gray-500 italic mb-6">Seja o primeiro a avaliar este produto!</p>
                         )}
 
-                        {/* Formulário de Novo Comentário */}
                         <div className="bg-gray-50 p-4 rounded-lg">
                             <h4 className="font-bold text-sm text-brand-dark mb-3 flex items-center gap-2">
                                 <MessageSquare className="w-4 h-4" /> Deixe sua avaliação

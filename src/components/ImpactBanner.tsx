@@ -8,7 +8,6 @@ interface ImpactBannerProps {
 export const ImpactBanner: React.FC<ImpactBannerProps> = ({ onImpactClick, onCottonClick }) => {
   return (
     <div className="mt-8 relative z-10">
-      {/* Barra de Contagem */}
       <div className="bg-[#3e5c46] text-white py-4 overflow-hidden relative shadow-lg">
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-2">
             <div className="flex gap-8 text-[10px] md:text-xs font-bold uppercase tracking-widest opacity-80">
@@ -25,11 +24,9 @@ export const ImpactBanner: React.FC<ImpactBannerProps> = ({ onImpactClick, onCot
         </div>
       </div>
 
-      {/* Conteúdo Principal */}
       <div className="bg-[#f5f5f0]">
         <div className="grid grid-cols-1 lg:grid-cols-2">
             
-            {/* Texto */}
             <div className="p-8 md:p-12 lg:p-24 flex flex-col justify-center items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
                 <h2 className="text-3xl md:text-5xl font-serif font-medium text-brand-dark mb-6 leading-tight">
                     Cada Camiseta <br className="hidden md:block"/> Planta 10 Árvores
@@ -53,7 +50,6 @@ export const ImpactBanner: React.FC<ImpactBannerProps> = ({ onImpactClick, onCot
                 </div>
             </div>
             
-            {/* Imagens */}
             <div className="relative h-[300px] md:h-[400px] lg:h-auto overflow-hidden order-1 lg:order-2">
                 <div className="grid grid-cols-2 h-full">
                     <img 

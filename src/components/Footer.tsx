@@ -22,7 +22,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLink, onOpenSubscription }
     <footer className="bg-[#f9f9f9] pt-12 md:pt-16 pb-8 border-t border-gray-200">
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-16">
-            {/* Coluna 1: Floresta Virtual */}
             <div className="flex flex-col gap-6">
                 <div className="space-y-4">
                     <h5 className="font-bold text-sm text-gray-900 uppercase tracking-wide">Sua Floresta</h5>
@@ -40,7 +39,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLink, onOpenSubscription }
                 </div>
             </div>
 
-             {/* Coluna 2: Suporte */}
             <div>
                 <h4 className="font-bold text-sm uppercase tracking-widest mb-4 md:mb-6 text-brand-dark">Suporte</h4>
                 <ul className="space-y-3 text-sm text-gray-600">
@@ -52,7 +50,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLink, onOpenSubscription }
                 </ul>
             </div>
 
-            {/* Coluna 3: Empresa */}
             <div>
                 <h4 className="font-bold text-sm uppercase tracking-widest mb-4 md:mb-6 text-brand-dark">Empresa</h4>
                 <ul className="space-y-3 text-sm text-gray-600">
@@ -65,7 +62,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLink, onOpenSubscription }
                 </ul>
             </div>
 
-            {/* Coluna 4: Newsletter & Subscription */}
             <div>
                  <h4 className="font-bold text-sm uppercase tracking-widest mb-3 text-brand-dark">Plantio Mensal</h4>
                  <p className="text-sm text-gray-600 mb-3 leading-relaxed">Plante árvores automaticamente para ajudar o planeta.</p>

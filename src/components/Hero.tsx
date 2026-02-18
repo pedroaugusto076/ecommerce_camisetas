@@ -7,17 +7,14 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onViewAll }) => {
   return (
     <div className="relative w-full h-[85vh] md:h-[600px] overflow-hidden">
-      {/* Imagem de Fundo */}
       <img
         src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&q=80&w=1920"
         alt="Camisetas Sustentáveis"
         className="absolute inset-0 w-full h-full object-cover object-center md:object-[center_30%]"
       />
       
-      {/* Overlay Gradiente - Mais forte em mobile para legibilidade */}
       <div className="absolute inset-0 bg-black/40 md:bg-gradient-to-r md:from-black/60 md:to-transparent pointer-events-none" />
 
-      {/* Conteúdo */}
       <div className="absolute inset-0 flex items-center justify-center md:justify-start">
         <div className="container mx-auto px-4 md:px-8 flex flex-col items-center md:items-start text-center md:text-left">
           <div className="max-w-xl text-white drop-shadow-lg animate-fade-in-up">

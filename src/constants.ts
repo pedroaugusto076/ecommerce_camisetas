@@ -152,5 +152,4 @@ export const BESTSELLERS: Product[] = [
   }
 ];
 
-// Lista consolidada de produtos para filtro
 export const ALL_PRODUCTS = [...NEW_ARRIVALS, ...BESTSELLERS];

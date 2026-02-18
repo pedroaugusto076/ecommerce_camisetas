@@ -15,7 +15,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      // Ajustado para 200px para alinhar com a média dos novos tamanhos + gap
       const scrollAmount = direction === 'left' ? -200 : 200;
       if (typeof scrollRef.current.scrollBy === 'function') {
         scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
@@ -32,7 +31,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
             <div className="w-full md:w-auto">
             <h2 className="text-xl md:text-3xl font-serif font-medium text-brand-dark mb-3 md:mb-4">{title}</h2>
             
-            {/* Categorias - Scrollable on mobile */}
             <div className="flex gap-4 md:gap-6 text-xs font-bold uppercase tracking-widest text-gray-500 overflow-x-auto no-scrollbar pb-2 md:pb-0 w-full">
                 <button 
                     onClick={() => onCategoryClick && onCategoryClick('Feminino')}
@@ -55,7 +53,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
             </div>
             </div>
             
-            {/* Setas - Escondidas no Mobile */}
             <div className="hidden md:flex gap-2">
             <button 
                 onClick={() => scroll('left')}
@@ -73,7 +70,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
         </div>
       </div>
 
-      {/* Container do Carousel - Full width on mobile with padding */}
       <div 
         ref={scrollRef}
         className="flex gap-3 md:gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar px-4 md:px-8 pb-4 md:pb-8"
@@ -85,7 +81,6 @@ export const ProductCarousel: React.FC<ProductCarouselProps> = ({ title, product
             onClick={onProductClick}
           />
         ))}
-        {/* Espaçador final para garantir que o último item não cole na borda */}
         <div className="w-1 flex-shrink-0" />
       </div>
     </section>

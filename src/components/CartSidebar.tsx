@@ -30,7 +30,6 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
   const [step, setStep] = useState<CheckoutStep>('cart');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Resetar o passo quando o carrinho fechar
   useEffect(() => {
     if (!isOpen) {
       const timer = setTimeout(() => {
@@ -58,7 +57,6 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
     e.preventDefault();
     setIsProcessing(true);
 
-    // Simular processamento de pagamento
     setTimeout(() => {
       setIsProcessing(false);
       setStep('success');
@@ -73,7 +71,6 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
 
   return (
     <>
-      {/* Overlay Escuro */}
       <div 
         className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[60] transition-opacity duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -81,13 +78,11 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
         onClick={handleClose}
       />
 
-      {/* Painel Lateral - Full width on mobile */}
       <div 
         className={`fixed top-0 right-0 h-full w-full sm:max-w-md bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        {/* ================= VIEW: CARRINHO ================= */}
         {step === 'cart' && (
           <>
             <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-white">
@@ -182,7 +177,6 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
           </>
         )}
 
-        {/* ================= VIEW: PAGAMENTO ================= */}
         {step === 'payment' && (
           <>
              <div className="p-5 border-b border-gray-100 flex items-center justify-between bg-white">
@@ -289,7 +283,6 @@ export const CartSidebar: React.FC<CartSidebarProps> = ({
           </>
         )}
 
-        {/* ================= VIEW: SUCESSO ================= */}
         {step === 'success' && (
           <div className="h-full flex flex-col items-center justify-center p-8 text-center animate-fade-in bg-white">
              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6 animate-[bounce_1s_infinite]">

@@ -26,13 +26,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [orders, setOrders] = useState<Order[]>([]);
-
-  // Form States
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
 
-  // Resetar visualização e carregar pedidos ao abrir
   useEffect(() => {
     if (isOpen) {
       if (currentUser) {
@@ -104,10 +101,9 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
       <div className="relative bg-white w-full max-w-md rounded-lg shadow-2xl overflow-hidden animate-fade-in flex flex-col max-h-[90vh]">
         
-        {/* Header */}
         <div className="flex justify-between items-center p-6 border-b border-gray-100">
           <div className="flex items-center gap-2">
-             {view === 'orders' && (
+            {view === 'orders' && (
                  <button onClick={() => setView('profile')} className="p-1 -ml-2 hover:bg-gray-100 rounded-full mr-1">
                      <ArrowLeft className="w-5 h-5 text-gray-500" />
                  </button>
@@ -125,7 +121,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         </div>
 
         <div className="p-8 overflow-y-auto">
-          {/* =========== VIEW: PERFIL =========== */}
           {view === 'profile' && currentUser && (
             <div className="flex flex-col items-center text-center space-y-6 animate-fade-in">
                <div className="w-24 h-24 bg-brand-lightGreen rounded-full flex items-center justify-center mb-2 shadow-inner">
@@ -155,7 +150,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
             </div>
           )}
 
-          {/* =========== VIEW: MEUS PEDIDOS =========== */}
           {view === 'orders' && (
               <div className="animate-fade-in space-y-4">
                   {orders.length === 0 ? (
@@ -193,7 +187,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
               </div>
           )}
 
-          {/* =========== VIEW: LOGIN / REGISTER =========== */}
           {(view === 'login' || view === 'register') && (
             <form onSubmit={handleSubmit} className="space-y-5 animate-fade-in">
               
@@ -268,7 +261,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           )}
         </div>
 
-        {/* Footer Toggle */}
         {(view === 'login' || view === 'register') && (
           <div className="p-6 bg-gray-50 text-center border-t border-gray-100">
             <p className="text-sm text-gray-600">

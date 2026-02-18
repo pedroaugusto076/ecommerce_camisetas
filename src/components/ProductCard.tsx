@@ -26,7 +26,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
         )}
       </div>
 
-      {/* Cores */}
       <div className="flex gap-1 md:gap-2 mb-1.5 md:mb-2">
         {product.colors.map((color, index) => (
           <div
@@ -38,7 +37,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
         {product.colors.length > 4 && <span className="text-[9px] md:text-xs text-gray-500">+</span>}
       </div>
 
-      {/* Detalhes */}
       <h3 className="text-[11px] md:text-sm font-medium text-gray-900 mb-0.5 md:mb-1 leading-tight line-clamp-2 min-h-[2.5em] md:min-h-0">{product.name}</h3>
       <div className="flex flex-wrap items-baseline gap-1.5 mb-1">
         {product.salePrice ? (
@@ -51,7 +49,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) =>
         )}
       </div>
 
-      {/* Avaliações */}
       <div className="flex items-center gap-1">
         <div className="flex text-brand-dark">
           {[...Array(5)].map((_, i) => (

@@ -8,7 +8,6 @@ interface RewardsSectionProps {
 export const RewardsSection: React.FC<RewardsSectionProps> = ({ onRegister, onLogin }) => {
   return (
     <section className="bg-[#3e5c46] text-white py-12 md:py-16 relative overflow-hidden z-10">
-        {/* Padrão de Fundo Abstrato (Folha) */}
         <svg className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0,100 Q200,50 400,100 T800,100" stroke="white" fill="none" strokeWidth="2" />
             <path d="M0,200 Q200,150 400,200 T800,200" stroke="white" fill="none" strokeWidth="2" />

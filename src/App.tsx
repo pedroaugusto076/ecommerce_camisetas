@@ -22,18 +22,13 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  
-  // Login State
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [loginInitialView, setLoginInitialView] = useState<'login' | 'register'>('login');
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-
-  // Modal States
   const [infoModalOpen, setInfoModalOpen] = useState(false);
-  const [infoModalKey, setInfoModalKey] = useState<string>('impact'); // Chave para identificar o conteúdo
+  const [infoModalKey, setInfoModalKey] = useState<string>('impact');
   const [subscriptionModalOpen, setSubscriptionModalOpen] = useState(false);
 
-  // Inicializar sessão via Supabase Auth
   useEffect(() => {
     getSession().then(setCurrentUser);
     const { data: { subscription } } = onAuthStateChange(setCurrentUser);
@@ -48,7 +43,7 @@ function App() {
   const handleNavigateToCategory = (category: string) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setSelectedCategory(category);
-    setSelectedProduct(null); // Fecha detalhe do produto se estiver aberto
+    setSelectedProduct(null);
   };
 
   const handleBackToHome = () => {
@@ -93,7 +88,6 @@ function App() {
     setCartItems([]);
   };
 
-  // Funções de Login / Cadastro
   const handleOpenLogin = () => {
     setLoginInitialView('login');
     setIsLoginOpen(true);
@@ -127,13 +121,11 @@ function App() {
       await saveOrder(currentUser.id, newOrder);
   };
 
-  // Funções de Informação (Modal Genérico)
   const handleOpenInfo = (key: string) => {
     setInfoModalKey(key);
     setInfoModalOpen(true);
   };
 
-  // Helper para obter conteúdo do modal
   const getModalContent = (key: string): { title: string, type: InfoModalType, content: React.ReactNode } => {
       switch (key) {
         case 'impact':
@@ -190,7 +182,6 @@ function App() {
                     </div>
                 )
             };
-        // --- SUPORTE ---
         case 'contact':
             return { title: "Fale Conosco", type: 'support', content: <div className="space-y-4"><p>Estamos aqui para ajudar! Nosso time atende de Seg a Sex, das 9h às 18h.</p><p><strong>E-mail:</strong> contato@earthfirst.com.br</p><p><strong>WhatsApp:</strong> (11) 99999-9999</p></div> };
         case 'help_center':
@@ -201,8 +192,6 @@ function App() {
             return { title: "Trocas e Devoluções", type: 'support', content: <div className="space-y-4"><p>Queremos que você ame sua peça. Se não servir, trocamos fácil.</p><p>Você tem <strong>30 dias</strong> corridos após o recebimento para solicitar a troca ou devolução gratuita, desde que a peça não tenha sido usada ou lavada.</p></div> };
         case 'faq':
             return { title: "Perguntas Frequentes", type: 'support', content: <div className="space-y-4"><p><strong>As camisetas encolhem?</strong><br/>Nossas peças são pré-encolhidas, mas como é algodão 100%, recomendamos não usar secadora em alta temperatura.</p><p><strong>Onde as árvores são plantadas?</strong><br/>Atualmente focamos em projetos no Brasil (Mata Atlântica), Madagascar e Indonésia.</p></div> };
-        
-        // --- EMPRESA ---
         case 'find_store':
             return { title: "Encontrar Loja", type: 'company', content: <div className="space-y-4"><p>Nascemos no digital, mas estamos expandindo! Visite nosso showroom sustentável:</p><p>Rua da Natureza, 123 - Pinheiros, São Paulo - SP</p></div> };
         case 'size_guide':
@@ -225,7 +214,6 @@ function App() {
 
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  // Filtro de produtos baseado na categoria selecionada
   let categoryProducts: Product[] = [];
   
   if (selectedCategory) {
@@ -262,7 +250,7 @@ function App() {
         onClearCart={handleClearCart}
         currentUser={currentUser}
         onLoginRequest={() => {
-            setIsCartOpen(false); // Fecha o carrinho para abrir o login
+            setIsCartOpen(false);
             setTimeout(handleOpenLogin, 300);
         }}
         onCheckoutSuccess={handleCheckoutSuccess}
@@ -277,7 +265,6 @@ function App() {
         initialView={loginInitialView}
       />
 
-      {/* Modal Genérico de Informações */}
       <InfoModal 
         isOpen={infoModalOpen}
         onClose={() => setInfoModalOpen(false)}
@@ -286,7 +273,6 @@ function App() {
         content={currentModalContent.content}
       />
 
-      {/* Modal de Assinatura */}
       <SubscriptionModal 
         isOpen={subscriptionModalOpen}
         onClose={() => setSubscriptionModalOpen(false)}
