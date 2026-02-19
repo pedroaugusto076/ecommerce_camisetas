@@ -1,70 +1,196 @@
-# EarthFirst - Loja de Moda Sustentável
+# 🌱 EarthFirst — Sustainable Fashion E-Commerce
 
-Projeto de e-commerce desenvolvido com **React.js** e **Vite**, focado em performance, design minimalista e uma experiência de usuário (UX) otimizada para dispositivos móveis.
+Plataforma de e-commerce desenvolvida com **React.js + Vite**, estruturada com arquitetura moderna baseada em **Supabase (PostgreSQL)** e integração com **Resend API** para envio de e-mails transacionais.
 
-## 🚀 Tecnologias Utilizadas
+O projeto foi concebido com foco em **alta performance, escalabilidade, segurança e experiência mobile-first**, aplicando princípios sólidos de engenharia de software, componentização avançada e boas práticas de arquitetura frontend/backend.
 
-*   **React 19:** Biblioteca principal para construção da interface.
-*   **Vite:** Build tool rápida e leve.
-*   **Tailwind CSS:** Framework de estilização utilitária para design responsivo.
-*   **Lucide React:** Biblioteca de ícones leves e consistentes.
-*   **Local Storage:** Persistência de dados (Carrinho, Usuário, Pedidos e Avaliações) sem necessidade de backend.
-
-## ✨ Funcionalidades Implementadas
-
-### 1. Navegação e Layout
-*   **Header Responsivo:** Menu "hambúrguer" animado para mobile (estilo Drawer) e navegação completa para desktop.
-*   **Hero Section:** Banner imersivo com call-to-action, adaptado para leitura em telas pequenas.
-*   **Footer Organizado:** Links úteis, newsletter e certificações distribuídos em grid responsivo.
-
-### 2. Catálogo de Produtos
-*   **Carrossel de Produtos (Touch-first):**
-    *   Scroll horizontal nativo para mobile (swipe).
-    *   Setas de navegação para desktop.
-    *   **Otimização de Card:** Ajuste de dimensões para exibir múltiplos produtos na tela do celular sem cortes excessivos (Visualização em grade compacta).
-*   **Grid de Categorias:** Navegação visual rápida por departamentos.
-*   **Página de Categoria:** Listagem completa com filtros visuais.
-*   **Detalhes do Produto:**
-    *   Galeria de imagens (Thumbnail scroll).
-    *   Seletor de Tamanho e Cor.
-    *   Sistema de Avaliações (Reviews) funcional.
-    *   Informações expansíveis (Accordions).
-
-### 3. Carrinho e Checkout
-*   **Sidebar Interativo:** Carrinho desliza da direita (ocupa 100% da tela no mobile).
-*   **Gestão de Itens:** Adicionar, remover e alterar quantidade.
-*   **Checkout Simulado:** Fluxo de revisão -> pagamento (cartão de crédito) -> sucesso.
-
-### 4. Autenticação e Perfil (Simulado)
-*   **Login/Cadastro:** Modal integrado.
-*   **Perfil do Usuário:** Visualização de dados e histórico de pedidos.
-*   **Persistência:** O estado do usuário e pedidos ficam salvos no navegador.
-
-### 5. Conteúdo Institucional
-*   **Modais Informativos:** Explicações sobre impacto ambiental, algodão orgânico, guia de medidas, etc.
-*   **Assinatura:** Modal para plano de assinatura de plantio de árvores.
-
-## 📱 Otimizações de Responsividade (Mobile First)
-
-Realizamos um trabalho detalhado para garantir a melhor experiência em celulares:
-
-1.  **Cards Compactos:** Redução da largura mínima dos cards de produto (`135px` em mobile) para permitir a visualização de 2 itens por linha ou visualização completa do item sem necessidade de rolagem lateral excessiva.
-2.  **Touch Targets:** Botões e áreas de clique aumentados para facilitar o toque (ex: botões de tamanho, menu).
-3.  **Layout Fluido:** O carrinho de compras e menus laterais ocupam a largura total em telas pequenas para maximizar o espaço de conteúdo.
-4.  **Tipografia Adaptativa:** Tamanhos de fonte ajustados (títulos menores, textos de apoio legíveis) para evitar quebras de linha indesejadas.
-5.  **Scroll Snapping:** O carrossel de produtos possui "imã" (snap) para parar o produto perfeitamente alinhado ao rolar.
-
-## 📦 Como Rodar o Projeto
-
-1.  Instale as dependências:
-    ```bash
-    npm install
-    ```
-2.  Rode o servidor de desenvolvimento:
-    ```bash
-    npm run dev
-    ```
-3.  Acesse `http://localhost:5173` no seu navegador.
+🌍 **Produção:**  
+https://ecommpedro.netlify.app
 
 ---
-*Projeto desenvolvido com foco em Clean Code e componentização.*
+
+## 🚀 Stack Tecnológica
+
+### 🖥️ Frontend
+
+- **React 19** — Arquitetura baseada em componentes reutilizáveis e composição declarativa.
+- **Vite** — Build tool com HMR ultrarrápido e otimização de bundles.
+- **Tailwind CSS** — Design system utilitário com responsividade mobile-first.
+- **Lucide React** — Biblioteca de ícones vetoriais leves.
+- **Context API + Hooks customizados** — Gerenciamento de estado desacoplado e escalável.
+
+---
+
+### 🔥 Backend & Infraestrutura
+
+- **Supabase**
+  - Autenticação JWT-based
+  - Banco relacional PostgreSQL
+  - Row Level Security (RLS)
+  - Storage
+  - Edge Functions (quando necessário)
+
+- **PostgreSQL**
+  - Modelagem relacional normalizada
+  - Constraints e integridade referencial
+  - Queries otimizadas
+  - Índices estratégicos para performance
+
+- **Resend API**
+  - E-mails transacionais automatizados
+  - Confirmação de pedidos
+  - Fluxo de comunicação com o usuário
+
+- **Netlify**
+  - Deploy contínuo (CI/CD)
+  - Ambiente de produção otimizado
+  - HTTPS automático
+  - CDN global
+
+---
+
+## 🏗️ Arquitetura do Sistema
+
+O projeto segue uma arquitetura desacoplada baseada em:
+
+```
+Client (React SPA)
+        ↓
+Supabase (Auth + Database + Storage)
+        ↓
+Resend API (Serviço de E-mail)
+```
+
+### Princípios Aplicados
+
+- Separação clara de responsabilidades (SoC)
+- Componentização granular
+- Controle de acesso baseado em políticas (RLS)
+- Persistência relacional segura
+- Gerenciamento de sessão via JWT
+- Environment variables para isolamento de credenciais
+- Estrutura preparada para escalabilidade horizontal
+
+---
+
+## ✨ Funcionalidades
+
+### 🔐 Autenticação Segura
+
+- Cadastro e login com Supabase Auth
+- Persistência de sessão
+- Proteção de rotas privadas
+- Recuperação de senha por e-mail
+- Controle de acesso por usuário autenticado
+
+---
+
+### 🛍️ Catálogo de Produtos
+
+- Carrossel touch-first otimizado
+- Scroll snapping para UX fluida
+- Grid responsivo de categorias
+- Página de produto com:
+  - Galeria com thumbnails
+  - Seleção dinâmica de tamanho e cor
+  - Sistema de avaliações persistido no banco
+  - Accordions informativos
+
+---
+
+### 🛒 Carrinho e Checkout
+
+- Sidebar dinâmica e responsiva
+- Gerenciamento de quantidade em tempo real
+- Persistência de pedidos no PostgreSQL
+- Criação de registros transacionais
+- Envio automático de e-mail via Resend
+- Fluxo estruturado de revisão → pagamento → confirmação
+
+---
+
+### 👤 Perfil do Usuário
+
+- Dashboard com histórico de pedidos
+- Consulta de dados persistidos
+- Integração direta com banco relacional
+- Isolamento de dados via RLS
+
+---
+
+### 🌎 Conteúdo Institucional
+
+- Modais informativos sobre sustentabilidade
+- Sistema de assinatura
+- Integração com e-mail marketing
+
+---
+
+## 🔐 Segurança e Boas Práticas
+
+- Row Level Security configurado
+- Queries protegidas por autenticação
+- Variáveis de ambiente isoladas
+- Estrutura pronta para produção
+- Tratamento de erros e validações robustas
+- Código modular e escalável
+
+---
+
+## 📱 Mobile First & Performance
+
+- Layout 100% responsivo
+- Cards compactos otimizados para telas pequenas
+- Touch targets ampliados
+- Tipografia adaptativa
+- Scroll snapping para alinhamento perfeito
+- Otimização de renderização
+- Redução de re-renders desnecessários
+
+---
+
+## 📦 Como Rodar Localmente
+
+1. Instale as dependências:
+
+```bash
+npm install
+```
+
+2. Configure as variáveis de ambiente:
+
+```
+VITE_SUPABASE_URL=your_url
+VITE_SUPABASE_ANON_KEY=your_key
+VITE_RESEND_API_KEY=your_key
+```
+
+3. Rode o servidor:
+
+```bash
+npm run dev
+```
+
+4. Acesse:
+
+```
+http://localhost:5173
+```
+
+---
+
+## 🎯 Objetivo Técnico
+
+Desenvolver uma aplicação de e-commerce com:
+
+- Arquitetura profissional
+- Backend real e escalável
+- Banco relacional robusto
+- Segurança baseada em políticas
+- Código limpo e componentizado
+- Experiência fluida em dispositivos móveis
+- Estrutura preparada para crescimento
+
+---
+
+*Projeto desenvolvido com foco em engenharia moderna, escalabilidade e padrões profissionais de mercado.*
